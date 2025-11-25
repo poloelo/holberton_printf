@@ -10,5 +10,6 @@ struct type_t {
 
 int _printf(const char *format,...);
 void print_int (va_list args);
+void print_diese(va_list args);
 
 #endif

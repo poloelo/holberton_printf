@@ -2,5 +2,5 @@
 
 int main()
 {
-    _printf("J'ai %i ans\n", 22);
+    _printf("Fatou %%\n");
 }

@@ -4,7 +4,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void print_int (va_list args);
+/**
+ * Creation of the type_t type that stores a char c and a function pointer.
+ * 
+ * The correspondance board is there to make links between the option scanned in the format string 
+ * and the option in the correspondances board.
+ */
 
 struct type_t {
     char c;
@@ -14,8 +19,17 @@ struct type_t {
 struct type_t correspondance[] = 
 {
     {'i', print_int},
+    {'d' ,print_double},
+    {'c', print_char},
+    {'s', print_string},
+    {'%' , print_diese},
     {'0', NULL}
 };
+
+/** 
+ * _printf functions prints a formatted string where all the options that starts with '%' 
+ * can be replaced by the parameters put after the formatted string in order of appearance
+ */
 
 int _printf(const char *format, ...)
 {
@@ -42,10 +56,31 @@ int _printf(const char *format, ...)
         }
         i++;
     }
-    return i;
+    return 0;
 }
 
 void print_int (va_list args)
 {
      printf("%i", va_arg(args, int));
+}
+
+void print_double(va_list args)
+{
+    return;
+}
+
+void print_char(va_list args)
+{
+    return;
+}
+
+void print_string(va_list args)
+{
+    return;
+}
+
+void print_diese(va_list args)
+{
+    putchar('%');
+    return;
 }
