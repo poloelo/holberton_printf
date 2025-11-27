@@ -1,6 +1,3 @@
-Voici un README.md propre, clair, en anglais, adapté au style attendu pour un projet Holberton, et parfaitement adapté à ton _printf (avec %d, %i, %c, %s, %%).
-Il est court, pro, et validé pour GitHub.
-
 ⸻
 
 ✅ README.md
@@ -98,13 +95,3 @@ Your Name / GitHub Username
 📝 License
 
 This project is released under the MIT License.
-
----
-
-# 🔥 Tu veux aussi ?
-
-✔ un **man_3_printf** correct au format *roff* ?  
-✔ un **README encore plus détaillé** ?  
-✔ une **démo GIF** pour GitHub ?  
-
-Dis-moi et je te le génère !
