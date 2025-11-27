@@ -1,18 +1,18 @@
 #include "main.h"
-
 int print_int(va_list *args)
 {
     int n = va_arg(*args, int);
-    int divisor = 1;
-    int temp, count = 0;
     unsigned int num;
+    int divisor = 1;
+    unsigned int temp;
+    int count = 0;
 
     /* Handle negative numbers */
     if (n < 0)
     {
         _putchar('-');
         count++;
-        num = (unsigned int)(-n);  /* Conversion vers unsigned */
+        num = (unsigned int)(-(n + 1)) + 1;  /* Astuce pour éviter l'overflow */
     }
     else
     {
