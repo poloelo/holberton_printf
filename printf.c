@@ -127,7 +127,7 @@ int print_string(va_list *args)
 
     if (s == NULL)
     {
-        s = "null";
+        s = "(null)";
     }
 
     /* Print characters until null terminator */
