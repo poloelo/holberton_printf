@@ -6,7 +6,8 @@ A custom implementation of the printf function in C, recreating the basic functi
 
 `_printf` is a variadic function that produces formatted output according to a format string. It processes the format string and prints characters to the standard output, replacing format specifiers with their corresponding values from the argument list.
 
-[printf_organigram.pdf](https://github.com/user-attachments/files/23799216/printf_organigram.pdf)
+
+<img width="675" height="900" alt="printf_organigram" src="https://github.com/user-attachments/assets/d7af2baa-4b35-42ca-ad9d-e159ed008015" />
 
 
 ## Function Prototype
