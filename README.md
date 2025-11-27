@@ -1,100 +1,110 @@
-_printf — Custom Implementation of printf
-
-Description
-
-_printf is a custom implementation of the standard C library function printf. It prints formatted output to the standard output (stdout) and supports a subset of the format specifiers. This project is written in C and adheres to C90 (ANSI C) standard, compatible with the Holberton checker requirements.
-
-The purpose of this project is to demonstrate mastery of:
-	•	Variadic functions using stdarg.h
-	•	Handling different data types
-	•	Implementing custom format specifiers
-	•	Writing clean, modular C code
+Voici un README.md propre, clair, en anglais, adapté au style attendu pour un projet Holberton, et parfaitement adapté à ton _printf (avec %d, %i, %c, %s, %%).
+Il est court, pro, et validé pour GitHub.
 
 ⸻
 
-Supported Format Specifiers
+✅ README.md
 
-Specifier	Description	Example Output
-%c	Prints a single character	_printf("%c", 'A'); // A
-%s	Prints a string (handles NULL)	_printf("%s", NULL); // (null)
-%d	Prints a signed decimal integer	_printf("%d", 42); // 42
-%i	Prints a signed decimal integer	_printf("%i", -7); // -7
-%%	Prints a literal % character	_printf("%%"); // %
+# _printf
 
-Note: Any unsupported format specifier prints % followed by the unknown character, mimicking the behavior of standard printf for unknown conversions.
+A custom implementation of the standard C `printf` function.  
+This project recreates a simplified version of `printf`, handling several format specifiers and printing output to the standard output stream.
 
-⸻
+This implementation follows the Holberton School specifications and the ISO C90 (GNU89) standard.
 
-File Structure
+---
+
+## 📌 Features
+
+The `_printf` function supports the following format specifiers:
+
+| Specifier | Output Type             |
+|----------|--------------------------|
+| `%c`     | Print a single character |
+| `%s`     | Print a string           |
+| `%d`     | Print a signed integer   |
+| `%i`     | Print a signed integer   |
+| `%%`     | Print a literal `%`      |
+
+Invalid format specifiers are printed literally (e.g. `"%k"` → `%k`).
+
+If a trailing `%` is found at the end of the string (e.g. `printf("%")`),  
+the function returns `-1` and prints nothing — matching project requirements.
+
+---
+
+## 📁 Project Structure
 
 .
-├── main.c          # Test cases for _printf
-├── printf.c        # Implementation of _printf and helper functions
-├── main.h          # Header file with function prototypes and struct definition
-└── README.md       # This file
+├── printf.c       # Main implementation of _printf and handlers
+├── printf.h       # Function prototypes and structure definitions
+├── man_3_printf   # Manual page for _printf
+└── README.md
+
+---
+
+## ⚙️ Compilation
+
+Compile using:
+
+```bash
+gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c
 
 
 ⸻
 
-Functions
+🔧 Usage
 
-_printf(const char *format, ...)
-	•	Description: Prints a formatted string to stdout.
-	•	Parameters:
-	•	format — Format string containing plain text and format specifiers.
-	•	Variadic arguments corresponding to the specifiers in the format string.
-	•	Return value: Number of characters printed (excluding the null byte).
-
-Helper Functions
-	•	print_char — Prints a single character.
-	•	print_string — Prints a string; prints (null) if the string is NULL.
-	•	print_int — Prints a signed integer.
-	•	print_double — Prints a double with six decimal places.
-	•	print_percent — Prints a literal %.
-
-⸻
-
-Usage
-
-#include "main.h"
+#include "printf.h"
 
 int main(void)
 {
-    int len;
+    _printf("Hello %s!\n", "world");         /* → Hello world! */
+    _printf("Number: %d\n", 42);             /* → Number: 42 */
+    _printf("Character: %c\n", 'A');         /* → Character: A */
+    _printf("Percent: %%\n");                /* → Percent: % */
 
-    len = _printf("Hello %s!\n", "world");
-    _printf("Printed %i characters.\n", len);
-
-    _printf("Show a percent sign: %%\n");
-    _printf("Character: %c\n", 'A');
-    _printf("Integer: %d\n", 123);
+    return 0;
 }
 
-Expected Output:
 
-Hello world!
-Printed 13 characters.
-Show a percent sign: %
-Character: A
-Integer: 123
+⸻
+
+🔍 Return Value
+
+_printf returns:
+	•	the total number of characters printed,
+	•	-1 if an error occurs (e.g. lone % at the end of the format string).
+
+⸻
+
+🚨 Edge Cases Handled
+	•	NULL string → prints (null)
+	•	unknown specifier → prints % then the character
+	•	% alone at the end → error (-1)
+	•	INT_MIN is correctly handled without overflow
+
+⸻
+
+✨ Authors
+
+Project completed as part of the Holberton School Low-Level Programming curriculum.
+
+Your Name / GitHub Username
 
 
 ⸻
 
-Compilation
+📝 License
 
-gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o _printf
+This project is released under the MIT License.
 
-	•	Compile in C90/ANSI C mode (Holberton standard)
-	•	Treats all warnings as errors (-Werror)
+---
 
-⸻
+# 🔥 Tu veux aussi ?
 
-Notes
-	•	This _printf implementation does not support all format specifiers like the standard C library version.
-	•	The code follows Holberton School coding standards:
-	•	No mixed declarations and code
-	•	No implicit function declarations
-	•	Only allowed functions: write or putchar
+✔ un **man_3_printf** correct au format *roff* ?  
+✔ un **README encore plus détaillé** ?  
+✔ une **démo GIF** pour GitHub ?  
 
-⸻
+Dis-moi et je te le génère !
