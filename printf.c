@@ -9,16 +9,100 @@
  * every argument passed in the variadic variables 
  */
 
-int print_int (va_list *args)
+int print_int(va_list *args)
 {
-     printf("%i", va_arg(*args, int));
-     return 0;
+    int n = va_arg(*args,int);
+    int divisor = 1;
+    int temp = n;
+    int count = 0;
+
+    if (n < 0)
+    {
+        putchar('-');
+        count++;
+        n = -n;
+        temp = n;
+    }
+
+    /* Trouver le plus grand diviseur */
+    while (temp >= 10)
+    {
+        temp /= 10;
+        divisor *= 10;
+    }
+
+    /* Imprimer chiffre par chiffre */
+    while (divisor > 0)
+    {
+        putchar((n / divisor) % 10 + '0');
+        count++;
+        divisor /= 10;
+ 
+   }
+   return count;
 }
+
 
 int print_double(va_list *args)
 {
-    return 0;
+    double n = va_arg(*args, double);
+    int count = 0;
+
+    /* Signe */
+    if (n < 0)
+    {
+        putchar('-');
+        count++;
+        n = -n;
+    }
+
+    /* Partie entière */
+    long int_part = (long)n;
+
+    /* Partie décimale */
+    double frac = n - int_part;
+    long dec_part = (long)(frac * 1000000); /* 6 décimales */
+
+    /* Impression partie entière */
+    long div = 1;
+    long tmp = int_part;
+
+    if (tmp == 0)
+    {
+        putchar('0');
+        count++;
+    }
+    else
+    {
+        while (tmp >= 10)
+        {
+            tmp /= 10;
+            div *= 10;
+        }
+        while (div > 0)
+        {
+            putchar((int_part / div) % 10 + '0');
+            count++;
+            div /= 10;
+        }
+    }
+
+    /* point */
+    putchar('.');
+    count++;
+
+    /* Impression partie décimale (exactement 6 chiffres) */
+    div = 100000;
+    while (div > 0)
+    {
+        putchar((dec_part / div) % 10 + '0');
+        count++;
+        div /= 10;
+    }
+
+    return count;
 }
+
 
 int print_char(va_list *args)
 {
