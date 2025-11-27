@@ -171,7 +171,7 @@ struct type_t correspondance[] =
     {'i', print_int},
     {'s', print_string},
     {'%' ,print_percent},
-    {'\0', print_error},
+    //{'\0', print_error},
     {'0', NULL}
 };
 
