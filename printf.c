@@ -9,6 +9,12 @@
  * extracted from the variadic argument list.
  */
 
+ int print_error(va_list *args)
+ {
+    putchar('%');
+    return 1;
+ }
+
 int print_int(va_list *args)
 {
     int n = va_arg(*args,int);
@@ -165,6 +171,7 @@ struct type_t correspondance[] =
     {'i', print_int},
     {'s', print_string},
     {'%' ,print_percent},
+    {'\0', print_error},
     {'0', NULL}
 };
 

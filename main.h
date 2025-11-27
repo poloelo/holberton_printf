@@ -9,6 +9,7 @@ struct type_t {
 };
 
 int _printf(const char *format,...);
+int print_error(va_list args);
 int print_int (va_list args);
 int print_double(va_list args);
 int print_string(va_list args);
