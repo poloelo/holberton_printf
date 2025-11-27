@@ -194,13 +194,29 @@ int _printf(const char *format, ...)
         else
         {
             /* Match format specifier */
-            for (j = 0; correspondance[j].f != NULL; j++)
+        int found = 0;
+        int j;
+
+        for (j = 0; correspondance[j].f != NULL; j++)
+
+        {
+            if (format[i + 1] == correspondance[j].c)
             {
-                if (format[i + 1] == correspondance[j].c)
-                {
-                    count += correspondance[j].f(&values);
-                }
+                count += correspondance[j].f(&values);
+                found = 1;
+                break;
             }
+        }
+
+        if (!found && format[i + 1] != '\0')
+
+            {
+            /* print % and unknown char */
+            putchar('%');
+            putchar(format[i + 1]);
+            count += 2;
+            }
+
             i++; /* Skip format specifier char */
         }
         i++;
