@@ -195,7 +195,6 @@ int _printf(const char *format, ...)
         {
             /* Match format specifier */
         int found = 0;
-        int j;
 
         for (j = 0; correspondance[j].f != NULL; j++)
 
