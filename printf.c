@@ -142,6 +142,7 @@ int print_percent(va_list *args)
 /**
  * Structure linking a format specifier to its corresponding print function.
  */
+
 struct type_t {
     char c;
     int (*f)(va_list *);
@@ -163,6 +164,7 @@ struct type_t correspondance[] =
  * Every '%' introduces a format specifier that is matched
  * with the corresponding function in the lookup table.
  */
+
 int _printf(const char *format, ...)
 {
     va_list values;
