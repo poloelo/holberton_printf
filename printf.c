@@ -5,8 +5,8 @@
 #include <stdio.h>
 
 /**
- *  Each function displays in characters ASCII the specifical type of 
- * every argument passed in the variadic variables 
+ * Each function prints the ASCII characters of a specific type
+ * extracted from the variadic argument list.
  */
 
 int print_int(va_list *args)
@@ -16,6 +16,7 @@ int print_int(va_list *args)
     int temp = n;
     int count = 0;
 
+    /* Handle negative numbers */
     if (n < 0)
     {
         putchar('-');
@@ -24,22 +25,22 @@ int print_int(va_list *args)
         temp = n;
     }
 
-    /* Trouver le plus grand diviseur */
+    /* Find the highest divisor */
     while (temp >= 10)
     {
         temp /= 10;
         divisor *= 10;
     }
 
-    /* Imprimer chiffre par chiffre */
+    /* Print digits one by one */
     while (divisor > 0)
     {
         putchar((n / divisor) % 10 + '0');
         count++;
         divisor /= 10;
- 
-   }
-   return count;
+    }
+
+    return count;
 }
 
 
@@ -48,7 +49,7 @@ int print_double(va_list *args)
     double n = va_arg(*args, double);
     int count = 0;
 
-    /* Signe */
+    /* Handle negative numbers */
     if (n < 0)
     {
         putchar('-');
@@ -56,14 +57,14 @@ int print_double(va_list *args)
         n = -n;
     }
 
-    /* Partie entière */
+    /* Extract integer part */
     long int_part = (long)n;
 
-    /* Partie décimale */
+    /* Extract fractional part (6 decimals) */
     double frac = n - int_part;
-    long dec_part = (long)(frac * 1000000); /* 6 décimales */
+    long dec_part = (long)(frac * 1000000);
 
-    /* Impression partie entière */
+    /* Print integer part */
     long div = 1;
     long tmp = int_part;
 
@@ -74,11 +75,14 @@ int print_double(va_list *args)
     }
     else
     {
+        /* Find divisor */
         while (tmp >= 10)
         {
             tmp /= 10;
             div *= 10;
         }
+
+        /* Print each digit */
         while (div > 0)
         {
             putchar((int_part / div) % 10 + '0');
@@ -87,11 +91,11 @@ int print_double(va_list *args)
         }
     }
 
-    /* point */
+    /* Print decimal separator */
     putchar('.');
     count++;
 
-    /* Impression partie décimale (exactement 6 chiffres) */
+    /* Print fractional digits (fixed 6 digits) */
     div = 100000;
     while (div > 0)
     {
@@ -108,15 +112,18 @@ int print_char(va_list *args)
 {
     int count = 0;
     char c = va_arg(*args, int);
+
+    /* Print one character */
     putchar(c);
-    count++;
-    return count;
+    return 1;
 }
 
 int print_string(va_list *args)
 {
     int i = 0;
     char *s = va_arg(*args, char *);
+
+    /* Print characters until null terminator */
     while (s[i] != '\0')
     {
         putchar(s[i]);
@@ -127,37 +134,35 @@ int print_string(va_list *args)
 
 int print_percent(va_list *args)
 {
+    /* Print '%' literally */
     putchar('%');
     return 1;
 }
 
 /**
- * Creation of the type_t type that stores a char c and a function pointer.
- * 
- * The correspondance board is there to make links between the option scanned in the format string 
- * and the option in the correspondances board.
+ * Structure linking a format specifier to its corresponding print function.
  */
-
 struct type_t {
     char c;
     int (*f)(va_list *);
 };
 
-struct type_t correspondance[] = 
+/* Lookup table for format specifiers */
+struct type_t correspondance[] =
 {
     {'d' ,print_double},
-    {'c', print_char}, 
+    {'c', print_char},
     {'i', print_int},
     {'s', print_string},
     {'%' ,print_percent},
     {'0', NULL}
 };
 
-/** 
- * _printf functions prints a formatted string where all the options that starts with '%' 
- * can be replaced by the parameters put after the formatted string in order of appearance
+/**
+ * _printf prints a formatted string.
+ * Every '%' introduces a format specifier that is matched
+ * with the corresponding function in the lookup table.
  */
-
 int _printf(const char *format, ...)
 {
     va_list values;
@@ -168,23 +173,26 @@ int _printf(const char *format, ...)
 
     while (format[i] != '\0')
     {
-        if (format[i] != '%')   
+        /* Direct character printing */
+        if (format[i] != '%')
         {
-        putchar(format[i]);
-        count++;
+            putchar(format[i]);
+            count++;
         }
-        else if (format[i] == '%')
+        else
         {
-            for(int j = 0; correspondance[j].f != NULL ; j++)
+            /* Match format specifier */
+            for (int j = 0; correspondance[j].f != NULL; j++)
             {
                 if (format[i + 1] == correspondance[j].c)
                 {
                     count += correspondance[j].f(&values);
                 }
             }
-            i++;
+            i++; /* Skip format specifier char */
         }
         i++;
     }
+
     return count;
 }
