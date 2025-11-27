@@ -129,12 +129,14 @@ int print_string(va_list *args)
     {
         return _printf("(null)");
     }
-
+    else 
+    {
     /* Print characters until null terminator */
     while (s[i] != '\0')
     {
         putchar(s[i]);
         i++;
+    }
     }
     return i;
 }
