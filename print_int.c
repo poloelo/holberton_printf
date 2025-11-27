@@ -10,8 +10,8 @@ int print_int(va_list *args)
     /* Special case: INT_MIN */
     if (n == -2147483648)
     {
-        putchar('-');
-        putchar('2');
+        _putchar('-');
+        _putchar('2');
         count += 2;
         n = 147483648; /* Remove the leading "2" */
     }
@@ -19,7 +19,7 @@ int print_int(va_list *args)
     /* Handle negative numbers */
     if (n < 0)
     {
-        putchar('-');
+        _putchar('-');
         count++;
         n = -n;
     }
@@ -36,7 +36,7 @@ int print_int(va_list *args)
     /* Print digits */
     while (divisor > 0)
     {
-        putchar((n / divisor) % 10 + '0');
+        _putchar((n / divisor) % 10 + '0');
         count++;
         divisor /= 10;
     }

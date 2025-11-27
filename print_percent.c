@@ -5,6 +5,6 @@ int print_percent(va_list *args)
 {
     (void)args;
     /* Print '%' literally */
-    putchar('%');
+    _putchar('%');
     return 1;
 }

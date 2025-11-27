@@ -1,106 +1,6 @@
-#include "printf.h"
-#include <stdio.h>
+#include "main.h"
 #include <stdarg.h>
 #include <stdlib.h>
-#include <stdio.h>
-
-/**
- * Each function prints the ASCII characters of a specific type
- * extracted from the variadic argument list.
- */
-
- 
-int print_int(va_list *args)
-{
-    int n = va_arg(*args, int);
-    int divisor = 1;
-    int temp, count = 0;
-
-    /* Special case: INT_MIN */
-    if (n == -2147483648)
-    {
-        putchar('-');
-        putchar('2');
-        count += 2;
-        n = 147483648; /* Remove the leading "2" */
-    }
-
-    /* Handle negative numbers */
-    if (n < 0)
-    {
-        putchar('-');
-        count++;
-        n = -n;
-    }
-
-    temp = n;
-
-    /* Find divisor */
-    while (temp >= 10)
-    {
-        temp /= 10;
-        divisor *= 10;
-    }
-
-    /* Print digits */
-    while (divisor > 0)
-    {
-        putchar((n / divisor) % 10 + '0');
-        count++;
-        divisor /= 10;
-    }
-
-    return count;
-}
-
-
-int print_char(va_list *args)
-{
-    char c = va_arg(*args, int);
-
-    /* Print one character */
-    putchar(c);
-    return 1;
-}
-
-int print_string(va_list *args)
-{
-    int i = 0;
-    char *s = va_arg(*args, char *);
-
-    if (s == NULL)
-    {
-        s = "(null)";
-    }
-
-    /* Print characters until null terminator */
-    while (s[i] != '\0')
-    {
-        putchar(s[i]);
-        i++;
-    }
-    
-    return i;
-}
-
-int print_percent(va_list *args)
-{
-    (void)args;
-    /* Print '%' literally */
-    putchar('%');
-    return 1;
-}
-
-/**
- * Structure linking a format specifier to its corresponding print function.
- */
-
-typedef struct type_flag{
-    char c;
-    int (*f)(va_list *);
-} flag;
-
-/* Lookup table for format specifiers */
 
 flag f_list[] =
 {
@@ -111,7 +11,6 @@ flag f_list[] =
     {'%' ,print_percent},
     {'0', NULL}
 };
-
 /**
  * _printf prints a formatted string.
  * Every '%' introduces a format specifier that is matched
@@ -133,7 +32,7 @@ int _printf(const char *format, ...)
     {
         if (format[i] != '%')
         {
-            putchar(format[i]);
+            _putchar(format[i]);
             count++;
             i++;
         }
@@ -154,8 +53,8 @@ int _printf(const char *format, ...)
 
                 if (!found)
                 {
-                    putchar('%');
-                    putchar(format[i + 1]);
+                    _putchar('%');
+                    _putchar(format[i + 1]);
                     count += 2;
                 }
                 i += 2; 
