@@ -127,17 +127,16 @@ int print_string(va_list *args)
 
     if (s == NULL)
     {
-        return _printf("(null)");
+        s = "null"
     }
-    else 
-    {
+
     /* Print characters until null terminator */
     while (s[i] != '\0')
     {
         putchar(s[i]);
         i++;
     }
-    }
+    
     return i;
 }
 
