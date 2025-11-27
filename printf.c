@@ -125,9 +125,9 @@ int _printf(const char *format, ...)
         {
             putchar(format[i]);
             count++;
-            i++; // Avancer l'index pour un caractère normal
+            i++;
         }
-        else // format[i] est '%'
+        else
         {
             found = 0;
             if (format[i + 1] != '\0')
@@ -148,12 +148,11 @@ int _printf(const char *format, ...)
                     putchar(format[i + 1]);
                     count += 2;
                 }
-                i += 2; // Avancer l'index de 2 (pour '%' et le spécificateur/caractère qui suit)
+                i += 2; 
             }
             else
             {
-                i++; // '%' est le dernier caractère, on avance de 1 pour atteindre '\0' et terminer la boucle.
-                /* Comportement défini: le '%' seul en fin de chaîne est ignoré. */
+                i++;
             }
         }
     }
