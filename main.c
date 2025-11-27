@@ -2,5 +2,6 @@
 
 int main(void)
 {
-    _printf("%");
+    int count = _printf("%");
+    _printf("%i", count);
 }

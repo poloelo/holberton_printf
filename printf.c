@@ -147,7 +147,6 @@ int _printf(const char *format, ...)
                     putchar('%');
                     putchar(format[i + 1]);
                     count += 2;
-                    return 0;
                 }
                 i += 2; 
             }
