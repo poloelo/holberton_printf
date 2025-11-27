@@ -67,6 +67,7 @@ Number: 42
 Percentage: 100%
 ```
 
+
 ## Compilation
 
 Compile the program using gcc with the following flags:
@@ -92,7 +93,7 @@ gcc -Wall -Werror -Wextra -pedantic -Wno-format -std=gnu89 *.c -o printf
 
 ## Authors
 
-Project developed as part of a C programming curriculum.
+Project developed by Ndeye Fatou Samb and Paul Gioria.
 
 ## License
 
